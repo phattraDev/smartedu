@@ -538,10 +538,27 @@ def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, unknown))
 
     logger.info("Bot is running...")
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
+
+    import threading
+    if threading.current_thread() is threading.main_thread():
+        # Running as main thread — use normal polling
+        app.run_polling(allowed_updates=Update.ALL_TYPES)
+    else:
+        # Running as background thread — manually drive the event loop
+        import asyncio
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+        async def run():
+            async with app:
+                await app.start()
+                await app.updater.start_polling(allowed_updates=Update.ALL_TYPES)
+                # Keep running until the loop is stopped
+                while True:
+                    await asyncio.sleep(3600)
+
+        loop.run_until_complete(run())
 
 
 if __name__ == "__main__":
-    import asyncio, sys
-    asyncio.set_event_loop(asyncio.new_event_loop())
     main()
