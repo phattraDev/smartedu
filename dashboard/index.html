@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Bot Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><path d='M8 22V12l8-4 8 4v10' stroke='white' stroke-width='1.5' fill='none' stroke-linejoin='round'/><rect x='13' y='16' width='6' height='6' rx='1' fill='white'/><path d='M16 8v2' stroke='white' stroke-width='1.5' stroke-linecap='round'/></svg>" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       LOGIN SCREEN
+  ══════════════════════════════════════════════ -->
+  <div id="login-screen" class="screen active">
+
+    <!-- Left branding panel -->
+    <div class="lp-left">
+      <div class="lp-left-inner">
+        <div class="lp-logo">
+          <svg viewBox="0 0 44 44" fill="none">
+            <rect width="44" height="44" rx="13" fill="rgba(255,255,255,0.15)"/>
+            <path d="M11 32V19l11-6 11 6v13" stroke="white" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            <rect x="17" y="23" width="10" height="9" rx="1.5" fill="white"/>
+            <circle cx="22" cy="13" r="2" fill="white"/>
+            <path d="M22 15v2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h1 class="lp-title">School Bot</h1>
+        <p class="lp-tagline">The smart way to keep parents informed</p>
+
+        <div class="lp-features">
+          <div class="lp-feature">
+            <div class="lp-feature-dot"></div>
+            <div>
+              <strong>Homework Tracking</strong>
+              <span>Submit daily assignments per class</span>
+            </div>
+          </div>
+          <div class="lp-feature">
+            <div class="lp-feature-dot"></div>
+            <div>
+              <strong>Instant Broadcasts</strong>
+              <span>Reach all parents in one click</span>
+            </div>
+          </div>
+          <div class="lp-feature">
+            <div class="lp-feature-dot"></div>
+            <div>
+              <strong>Holiday Calendar</strong>
+              <span>Manage school closures easily</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative blobs -->
+      <div class="lp-blob lp-blob-1"></div>
+      <div class="lp-blob lp-blob-2"></div>
+    </div>
+
+    <!-- Right form panel -->
+    <div class="lp-right">
+      <div class="lp-form-wrap">
+
+        <div class="lp-form-top">
+          <div class="lp-form-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26">
+              <path d="M3 21V10l9-5 9 5v11" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <rect x="9" y="14" width="6" height="7" rx="1" fill="currentColor"/>
+              <path d="M12 5v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>Welcome back</h2>
+          <p>Sign in to your admin dashboard</p>
+        </div>
+
+        <form id="login-form" novalidate>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter username" required autocomplete="username" />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="pw-wrapper">
+              <input type="password" id="password" placeholder="Enter password" required autocomplete="current-password" />
+              <button type="button" id="toggle-password" class="pw-toggle" tabindex="-1" aria-label="Show password">
+                <svg id="pw-eye" viewBox="0 0 20 20" fill="currentColor" width="15" height="15">
+                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                  <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="login-error" class="error-msg hidden"></div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-login" id="login-btn">
+            <span id="login-btn-text">Sign In</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+
+        </form>
+
+        <p class="lp-secure-note">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12">
+            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          Secure · School staff only
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MAIN DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <div id="dashboard-screen" class="screen">
+
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M3 21V9l9-6 9 6v12" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            <rect x="9" y="13" width="6" height="8" rx="1" fill="white"/>
+            <path d="M12 3v2" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="sidebar-brand-text">
+          <span class="sidebar-title">School Bot</span>
+          <span class="sidebar-subtitle">Admin Portal</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <p class="nav-section-label">Management</p>
+        <button class="nav-item active" data-tab="homework">
+          <span class="nav-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg></span>
+          <span class="nav-label">Homework</span>
+        </button>
+        <button class="nav-item" data-tab="holidays">
+          <span class="nav-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg></span>
+          <span class="nav-label">Holidays</span>
+        </button>
+        <button class="nav-item" data-tab="broadcast">
+          <span class="nav-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd"/></svg></span>
+          <span class="nav-label">Broadcast</span>
+        </button>
+        <button class="nav-item" data-tab="classes">
+          <span class="nav-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v1h-3zM4.75 14.094A5.973 5.973 0 004 17v1H1v-1a3 3 0 013.75-2.906z"/></svg></span>
+          <span class="nav-label">Classes</span>
+        </button>
+        <button class="nav-item" data-tab="users">
+          <span class="nav-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a4 4 0 100 8 4 4 0 000-8zM3 18a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg></span>
+          <span class="nav-label">Users</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar" id="user-avatar">A</div>
+          <span id="user-label">Admin</span>
+        </div>
+        <button id="logout-btn" class="logout-btn" title="Logout">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="topbar">
+        <div id="topbar-title" class="topbar-title">Homework</div>
+        <div class="stats-bar">
+          <div class="stat-pill">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v1h-3zM4.75 14.094A5.973 5.973 0 004 17v1H1v-1a3 3 0 013.75-2.906z"/></svg>
+            <span id="stat-subscribers">—</span> subscribers
+          </div>
+          <div class="stat-pill">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            <span id="stat-classes">—</span> classes
+          </div>
+        </div>
+      </div>
+
+      <!-- HOMEWORK -->
+      <section id="tab-homework" class="tab-content active">
+        <div class="page-header">
+          <div class="page-header-icon indigo"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg></div>
+          <div><h2>Submit Homework</h2><p>Add today's assignments for a class</p></div>
+        </div>
+        <div class="card">
+          <form id="homework-form" enctype="multipart/form-data">
+            <div class="form-row">
+              <div class="form-group"><label>Class</label><select id="hw-class" required><option value="">Select class…</option></select></div>
+              <div class="form-group"><label>Subject</label><input type="text" id="hw-subject" placeholder="e.g. Mathematics" required /></div>
+            </div>
+            <div class="form-group"><label>Assignment Description</label><textarea id="hw-description" rows="3" placeholder="Describe the homework assignment…" required></textarea></div>
+            <div class="form-row">
+              <div class="form-group"><label>Due Date</label><input type="text" id="hw-due" placeholder="e.g. Wednesday, May 13" required /></div>
+              <div class="form-group"><label>Teacher Name</label><input type="text" id="hw-teacher" placeholder="e.g. Ms. Johnson" required /></div>
+            </div>
+            <div class="form-group">
+              <label>Attachment <span class="optional">(optional)</span></label>
+              <div class="file-drop" id="file-drop">
+                <svg viewBox="0 0 20 20" fill="currentColor" width="24" height="24" style="color:var(--gray-400)">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <p class="file-drop-text">Drop a file here or <span class="file-drop-link">browse</span></p>
+                <p class="file-drop-hint">PDF, DOCX, TXT, MD, XLSX, PPTX, images — max 20 MB</p>
+                <input type="file" id="hw-file" accept=".pdf,.doc,.docx,.txt,.md,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg" style="display:none" />
+              </div>
+              <div id="file-preview" class="file-preview hidden">
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" style="color:var(--indigo)"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+                <span id="file-name-display"></span>
+                <button type="button" id="file-clear" class="file-clear">✕</button>
+              </div>
+            </div>
+            <div id="hw-msg" class="msg hidden"></div>
+            <button type="submit" class="btn btn-primary"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Submit Homework</button>
+          </form>
+        </div>
+        <div class="list-header">
+          <h3>Recent Submissions</h3>
+          <select id="hw-filter-class" class="filter-select"><option value="">All classes</option></select>
+        </div>
+        <div id="homework-list" class="item-list"><div class="skeleton-list"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></div>
+      </section>
+
+      <!-- HOLIDAYS -->
+      <section id="tab-holidays" class="tab-content">
+        <div class="page-header">
+          <div class="page-header-icon emerald"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg></div>
+          <div><h2>Manage Holidays</h2><p>Add and view school closures and holidays</p></div>
+        </div>
+        <div class="card">
+          <form id="holiday-form">
+            <div class="form-group"><label>Holiday Title</label><input type="text" id="hol-title" placeholder="e.g. Eid Al-Fitr" required /></div>
+            <div class="form-row">
+              <div class="form-group"><label>Start Date</label><input type="date" id="hol-start" required /></div>
+              <div class="form-group"><label>End Date</label><input type="date" id="hol-end" required /></div>
+            </div>
+            <div class="form-group"><label>Reason <span class="optional">(optional)</span></label><input type="text" id="hol-reason" placeholder="e.g. National public holiday" /></div>
+            <div id="hol-msg" class="msg hidden"></div>
+            <button type="submit" class="btn btn-primary"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/></svg> Add Holiday</button>
+          </form>
+        </div>
+        <div class="list-header"><h3>Scheduled Holidays</h3></div>
+        <div id="holidays-list" class="item-list"><div class="skeleton-list"><div class="skeleton"></div><div class="skeleton"></div></div></div>
+      </section>
+
+      <!-- BROADCAST -->
+      <section id="tab-broadcast" class="tab-content">
+        <div class="page-header">
+          <div class="page-header-icon amber"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd"/></svg></div>
+          <div><h2>Send Broadcast</h2><p>Push an announcement to all subscribed parents</p></div>
+        </div>
+        <div class="card">
+          <form id="broadcast-form">
+            <div class="form-group"><label>Message</label><textarea id="bc-message" rows="5" placeholder="Type your announcement here…" required></textarea><div class="char-count"><span id="bc-char-count">0</span> characters</div></div>
+            <div id="bc-msg" class="msg hidden"></div>
+            <button type="submit" class="btn btn-danger"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd"/></svg> Send to All Subscribers</button>
+          </form>
+        </div>
+        <div class="list-header">
+          <h3>Broadcast History</h3>
+          <button class="btn btn-ghost-red btn-sm" onclick="clearBroadcastHistory()">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+            Clear History
+          </button>
+        </div>
+        <div id="broadcast-history" class="item-list"><div class="skeleton-list"><div class="skeleton"></div><div class="skeleton"></div></div></div>
+      </section>
+
+      <!-- CLASSES -->
+      <section id="tab-classes" class="tab-content">
+        <div class="page-header">
+          <div class="page-header-icon violet"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v1h-3zM4.75 14.094A5.973 5.973 0 004 17v1H1v-1a3 3 0 013.75-2.906z"/></svg></div>
+          <div><h2>Manage Classes</h2><p>Add and remove school classes</p></div>
+        </div>
+        <div class="card">
+          <form id="class-form">
+            <div class="form-row">
+              <div class="form-group"><label>Class Name</label><input type="text" id="cls-name" placeholder="e.g. Grade 5A" required /></div>
+              <div class="form-group"><label>Class Code</label><input type="text" id="cls-code" placeholder="e.g. 5A" required /></div>
+            </div>
+            <div id="cls-msg" class="msg hidden"></div>
+            <button type="submit" class="btn btn-primary"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/></svg> Add Class</button>
+          </form>
+        </div>
+        <div class="list-header"><h3>All Classes</h3></div>
+        <div id="classes-list" class="item-list"><div class="skeleton-list"><div class="skeleton"></div><div class="skeleton"></div></div></div>
+      </section>
+
+      <!-- USERS -->
+      <section id="tab-users" class="tab-content">
+        <div class="page-header">
+          <div class="page-header-icon indigo"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a4 4 0 100 8 4 4 0 000-8zM3 18a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg></div>
+          <div><h2>Telegram Users</h2><p>Parents who have started the bot</p></div>
+        </div>
+        <div class="user-summary-grid">
+          <div class="card user-summary-card">
+            <span>Total Users</span>
+            <strong id="users-total">0</strong>
+          </div>
+          <div class="card user-summary-card">
+            <span>Active Users</span>
+            <strong id="users-active">0</strong>
+          </div>
+          <div class="card user-summary-card">
+            <span>Inactive Users</span>
+            <strong id="users-inactive">0</strong>
+          </div>
+        </div>
+        <div class="list-header">
+          <h3>Registered Users</h3>
+          <button class="btn btn-primary btn-sm" onclick="loadUsers()">Refresh</button>
+        </div>
+        <div id="users-list" class="item-list"><div class="skeleton-list"><div class="skeleton"></div><div class="skeleton"></div></div></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MODAL (replaces window.confirm / alert)
+  ══════════════════════════════════════════════ -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-icon-wrap" id="modal-icon-wrap">
+        <svg id="modal-icon" viewBox="0 0 24 24" fill="none" width="26" height="26"></svg>
+      </div>
+      <h3 id="modal-title"></h3>
+      <p id="modal-message"></p>
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn btn-ghost-cancel">Cancel</button>
+        <button id="modal-confirm" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div id="toast-container"></div>
+
+  <script src="/static/app.js?v=2"></script>
+  <script>
+    document.getElementById("toggle-password").addEventListener("click", () => {
+      const input = document.getElementById("password");
+      input.type = input.type === "password" ? "text" : "password";
+    });
+  </script>
+</body>
+</html>
